@@ -84,6 +84,12 @@ jobs:
           # 1. 生成されたファイルを一時的に保存
           cp "$OUTPUT_FILENAME" /tmp/"$OUTPUT_FILENAME"
           
+          # 💡 [修正点]: ローカルで生成されたファイルを削除して衝突を回避
+          if [ -f "$OUTPUT_FILENAME" ]; then
+            echo "Removing locally generated $OUTPUT_FILENAME to avoid checkout conflict."
+            rm "$OUTPUT_FILENAME"
+          fi
+
           # 2. ターゲットブランチの存在チェックと切り替え
           BRANCH_EXISTS=$(git ls-remote --heads origin "$TARGET_BRANCH" | wc -l)
 
