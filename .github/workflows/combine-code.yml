@@ -16,6 +16,11 @@ env:
 jobs:
   publish:
     runs-on: ubuntu-latest
+
+    # 💡 権限設定
+    permissions:
+      contents: write # リポジトリへの書き込み権限を許可
+      pull-requests: write # プルリクエストの作成/更新権限を許可（今回は必須ではないが安全のため）
     
     steps:
       - name: Checkout master (Shallow depth)
