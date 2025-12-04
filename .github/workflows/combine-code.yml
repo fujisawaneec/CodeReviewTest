@@ -4,15 +4,18 @@ on:
   push:
     branches:
       - master
-  # 手動実行を可能にするトリガー
+  # 手動実行を可能にする
   workflow_dispatch:
 
 # 💡 ワークフロー全体で使用する環境変数
 env:
+  # 出力ファイル名
   OUTPUT_FILENAME: combined.txt
+  # 出力先ブランチ名
   TARGET_BRANCH: combine-code
-  # ターゲット拡張子に .vcxproj と .vcxproj.filters を追加
+  # ターゲット拡張子
   TARGET_EXTENSIONS: .cpp,.h,.hpp,.vcxproj,.vcxproj.filters
+  # 除外ディレクトリ
   EXCLUDE_DIRS: externals,resources
 
 jobs:
@@ -28,7 +31,7 @@ jobs:
         # 結合するコードを取得（デフォルトでshallow clone）
         uses: actions/checkout@v4 
 
-      # 1. ソースコード結合ファイル（combined.txt）の生成
+      # 1. ソースコード結合ファイルの生成
       - name: Generate Code Summary
         id: generate
         shell: python
